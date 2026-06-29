@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>할 일 관리 프로그램</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="auth-shell">
+      <div class="auth-card">
+        <div class="brand">
+          <div class="brand-icon">✔</div>
+          <div>
+            <h1>ToDo 로그인</h1>
+            <p>로그인 후 할 일을 관리하세요.</p>
+          </div>
+        </div>
+
+        <div class="auth-body">
+          <div class="auth-field">
+            <label for="login-email">이메일</label>
+            <input
+              id="login-email"
+              type="email"
+              placeholder="example@gmail.com"
+            />
+          </div>
+
+          <div class="auth-field">
+            <label for="login-password">비밀번호</label>
+            <input
+              id="login-password"
+              type="password"
+              placeholder="비밀번호 입력"
+            />
+          </div>
+
+          <p id="auth-message" class="auth-message"></p>
+
+          <div class="auth-actions">
+            <button type="button" id="login-btn" class="primary-btn">
+              로그인
+            </button>
+            <button type="button" id="register-btn" class="secondary-btn">
+              회원가입
+            </button>
+          </div>
+
+          <p class="auth-note">로그인 정보가 없을 시 회원가입을 해주세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="register-shell" class="register-shell hidden">
+      <div class="register-card">
+        <div class="brand">
+          <div class="brand-icon">✏️</div>
+          <div>
+            <h1>회원가입</h1>
+            <p>이메일, 비밀번호, 이름을 입력하세요.</p>
+          </div>
+        </div>
+
+        <div class="auth-body">
+          <div class="auth-field">
+            <label for="register-name">이름</label>
+            <input id="register-name" type="text" placeholder="홍길동" />
+          </div>
+          <div class="auth-field">
+            <label for="register-email">이메일</label>
+            <input
+              id="register-email"
+              type="email"
+              placeholder="example@gmail.com"
+            />
+          </div>
+          <div class="auth-field">
+            <label for="register-password">비밀번호</label>
+            <input
+              id="register-password"
+              type="password"
+              placeholder="비밀번호 입력"
+            />
+          </div>
+
+          <p id="register-message" class="auth-message"></p>
+
+          <div class="auth-actions">
+            <button type="button" id="register-submit-btn" class="primary-btn">
+              가입하기
+            </button>
+            <button
+              type="button"
+              id="register-cancel-btn"
+              class="secondary-btn"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-shell hidden">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">✔</div>
+          <div>
+            <h1>ToDo</h1>
+            <p>일정 관리</p>
+          </div>
+        </div>
+
+        <nav class="menu">
+          <button class="menu-item active">전체</button>
+          <button class="menu-item">진행 중</button>
+          <button class="menu-item">완료</button>
+          <button class="menu-item">중요</button>
+        </nav>
+
+        <div class="summary-card">
+          <h2>오늘의 요약</h2>
+          <div class="summary-grid">
+            <div>
+              <span>총 할 일</span>
+              <strong id="total-count">0</strong>
+            </div>
+            <div>
+              <span>완료</span>
+              <strong id="done-count">0</strong>
+            </div>
+            <div>
+              <span>남은</span>
+              <strong id="todo-count">0</strong>
+            </div>
+            <div>
+              <span>중요한 할 일</span>
+              <strong id="important-count">0</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p class="breadcrumb">할 일 관리 프로그램</p>
+            <h2>오늘의 할 일</h2>
+          </div>
+          <div class="header-actions">
+            <div class="user-box">
+              <div class="avatar-wrapper">
+                <img id="user-avatar" src="avatar-default.svg" alt="프로필" />
+              </div>
+              <span id="user-email">user@example.com</span>
+              <button id="logout-btn" class="secondary-btn">로그아웃</button>
+            </div>
+            <button id="avatar-btn" class="icon-btn" aria-label="프로필 이미지 설정">+</button>
+          </div>
+        </header>
+
+        <section class="control-panel">
+          <div class="search-wrapper">
+            <span>🔍</span>
+            <input id="search-input" type="text" placeholder="할 일 검색하기" />
+          </div>
+        </section>
+
+        <section class="task-panel">
+          <div class="task-form-card">
+            <h3>새 할 일 추가</h3>
+            <div class="form-grid">
+              <input id="task-title" type="text" placeholder="할 일 제목" />
+              <input id="task-due" type="date" />
+              <select id="task-priority">
+                <option value="normal">일반</option>
+                <option value="important">중요</option>
+              </select>
+              <button id="add-task-btn" class="primary-btn">추가하기</button>
+            </div>
+          </div>
+
+          <div class="task-list-card">
+            <div class="task-list-header">
+              <div>
+                <h3>오늘의 할 일 목록</h3>
+                <p id="active-filter">전체 보기</p>
+              </div>
+              <div class="task-header-right">
+                <select id="sort-select">
+                  <option value="default">정렬</option>
+                  <option value="due">날짜순</option>
+                  <option value="newest">최신순</option>
+                  <option value="oldest">등록순</option>
+                  <option value="important">중요도순</option>
+                </select>
+                <span id="task-summary">0개 항목</span>
+              </div>
+            </div>
+            <ul id="task-list" class="task-list"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="avatar-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-card">
+        <h3>프로필 이미지 설정</h3>
+        <p>링크를 입력하면 동그라미 안에 이미지가 표시됩니다.</p>
+        <div class="auth-field">
+          <label for="avatar-url">이미지 URL</label>
+          <input id="avatar-url" type="url" placeholder="https://" />
+        </div>
+        <div class="modal-actions">
+          <button id="save-avatar-btn" class="primary-btn">저장</button>
+          <button id="close-avatar-btn" class="secondary-btn">취소</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
