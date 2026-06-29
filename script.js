@@ -346,7 +346,7 @@ async function handleLogin() {
     }
     setAuthMessage("로그인 성공! 앱으로 이동합니다.");
   } catch (error) {
-    setAuthMessage("로그인 실패: " + error.message, true);
+    setAuthMessage("로그인 실패! 입력 정보를 다시 확인해주세요.");
   }
 }
 
